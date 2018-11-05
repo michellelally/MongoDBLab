@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PostService} from '../services/post.service';
+import { PostService } from '../services/post.service';
 import { Observable } from 'rxjs';
-import {Post} from '../post.model';
+import { Post } from '../post.model';
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
@@ -9,17 +9,22 @@ import {Post} from '../post.model';
 })
 export class PostDetailsComponent implements OnInit {
 
-  
+
   posts: any = [];
 
-  constructor(private ps:PostService){}
+  constructor(private ps: PostService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     //this.posts = this.ps.getPosts();
     this.ps.getPostsData().subscribe(data => {
-        this.posts = data;
+      this.posts = data;
     });
+  }
+
+  onDelete(id: String) {
+    console.log(id);
+    this.ps.deletePost(id).subscribe();
+  }
 
 
-   }
 }
